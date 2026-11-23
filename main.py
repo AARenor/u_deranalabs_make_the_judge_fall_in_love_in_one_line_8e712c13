@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Write the single judge-facing line into the harness artifact."""
+"""Write the one-line entry artifact for the judge."""
 
 import os
 from pathlib import Path
@@ -11,10 +11,13 @@ LINE = (
 )
 
 
-def main() -> None:
-    output_dir = Path(os.environ.get("MAKEFUN_OUTPUT_DIR", "/output"))
+def write_entry(output_dir: Path) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
     (output_dir / "entry.txt").write_text(LINE, encoding="utf-8")
+
+
+def main() -> None:
+    write_entry(Path(os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")))
 
 
 if __name__ == "__main__":
